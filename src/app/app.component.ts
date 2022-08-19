@@ -32,10 +32,12 @@ export class AppComponent {
 
   generateTeams() {
 
-    if (!this.numberOfTeams || this.numberOfTeams <= 0) {
+    if (!this.numberOfTeams || this.numberOfTeams <= 0 || this.numberOfTeams > this.members.length) {
+      this.errorMessage = "More teams than members!";
       return;
     }
 
+    this.errorMessage = "";
     const allMembers = [...this.members];
 
     while (allMembers.length) {
@@ -52,7 +54,8 @@ export class AppComponent {
       }
     }
 
-    console.log(this.teams);
+    this.members = [];
+    this.numberOfTeams = "";
   }
 
   onGenerateInput(value: string) {
